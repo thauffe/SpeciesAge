@@ -28,7 +28,8 @@ Calculation is based on the reconstructed birth-death process (Nee et al., 1994)
 implemented in the make.bd function of the diversitree package (FitzJohn, 2012).
 }
 \examples{
-estimateBD(tree = , epsilon = 0.5)
+data(Cetacea)
+estimateBD(tree = Cetacea, epsilon = 0.5, rho =  87/89)
 }
 \references{
 FitzJohn R.G. 2012.

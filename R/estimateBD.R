@@ -27,7 +27,8 @@
 #' @return A named vector of two parameters, lambda and mu.
 #'
 #' @examples
-#' estimateBD(tree = , epsilon = 0.5)
+#' data(Cetacea)
+#' estimateBD(tree = Cetacea, epsilon = 0.5, rho =  87/89)
 
 
 estimateBD <- function(tree, epsilon = 0.0, rho = 1.0, ml_optim = "subplex") {
@@ -40,7 +41,7 @@ estimateBD <- function(tree, epsilon = 0.0, rho = 1.0, ml_optim = "subplex") {
   con <- paste0("mu ~ ", epsilon, " * lambda")
   bd_lik <- constrain(bd_lik, con)
   # Initial birth rate for ML search with yule rate
-  b_init <- phy$Nnode / sum(phy$edge.length)
+  b_init <- tree$Nnode / sum(tree$edge.length)
   if (epsilon > 0) {
     b_init <- b_init / epsilon
   }
