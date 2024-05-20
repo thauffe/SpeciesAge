@@ -7,13 +7,13 @@
 meanAge(v, lambda, mu, rho = 1)
 }
 \arguments{
-\item{v}{branching time}
+\item{v}{Branching time}
 
-\item{lambda}{speciation rate}
+\item{lambda}{Speciation rate}
 
-\item{mu}{extinction rate}
+\item{mu}{Extinction rate}
 
-\item{rho}{sampling fraction (Default: 1.0)}
+\item{rho}{Sampling fraction (Default: 1.0)}
 }
 \description{
 This function calculates the expected mean species age.

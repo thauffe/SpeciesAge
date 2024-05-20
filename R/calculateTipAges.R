@@ -1,5 +1,17 @@
 #' @title Get Phylogenetic Ages for the Tips of a Phylogeny
-
+#'
+#' @description This function calculates the phylogenetic ages for each tip in a tree.
+#'
+#' @param tree A phylogeny in ape “phylo” format
+#'
+#' @author Carlos Calderón del Cid, Torsten Hauffe
+#'
+#' @details This function is based on Tanentzap et al. (20XX)
+#'
+#' @return A data.frame with two columns.Name of the tip "tip" and its age "tip.age"
+#'
+#' @examples
+#' calculateTipAges(tree)
 calculateTipAges <- function(tree) {
   phy.age <- picante::node.age(tree)
   BL.position <- cbind(phy.age$edge, phy.age$age, tree$edge.length)
@@ -8,9 +20,9 @@ calculateTipAges <- function(tree) {
   ages <- BL.positions[, 5] + BL.positions[, 4]
   BL.positions <- cbind(BL.positions,ages)
   node.ages <- as.data.frame(BL.positions)
-  colnames(node.ages) <- c("parental.node","daughter.node",
-                           "dist.root","BL",
-                           "dist.tip","mrca.age")
+  colnames(node.ages) <- c("parental.node", "daughter.node",
+                           "dist.root", "BL",
+                           "dist.tip", "mrca.age")
   ## node.ages is a data frame listing as variables the identity of parental and
   # daughter nodes, the distance from the root and from the present of each node,
   # the branch length and the age of the most recent common ancestor
@@ -20,7 +32,7 @@ calculateTipAges <- function(tree) {
   species.ages <- species.ages[order(row.names(species.ages)), ]
   output.table <- as.data.frame(cbind(row.names(species.ages),
                                       species.ages$mrca.age))
-  colnames(output.table) <- c('tip','tip.age')
+  colnames(output.table) <- c("tip", "tip.age")
   output.table$tip.age <- as.numeric(output.table$tip.age)
   return(output.table)
 }

@@ -4,14 +4,14 @@
 \alias{estimateBD}
 \title{Esitmate Speciation and Extinction rate from phylogeny}
 \usage{
-estimateBD(phy, epsilon = 0, rho = 1, ml_optim = "subplex")
+estimateBD(tree, epsilon = 0, rho = 1, ml_optim = "subplex")
 }
 \arguments{
-\item{phy}{An ultrametric bifurcating phylogenetic tree, in ape "phylo" format.}
+\item{tree}{An ultrametric bifurcating phylogenetic tree, in ape "phylo" format.}
 
-\item{epsilon}{Extinction fraction}
+\item{epsilon}{Extinction fraction (Default: 0.0)}
 
-\item{rho}{Sampling fraction}
+\item{rho}{Sampling fraction (Default: 1.0)}
 
 \item{ml_optim}{Method to use for optimisation (Default: "subplex"). May be one of "optim", "subplex", "nlminb", "nlm" (partial unambigious string is allowed).}
 }
@@ -21,8 +21,23 @@ A named vector of two parameters, lambda and mu.
 \description{
 This function estimates speciation and extinction rate from a phylogeny under a given extinction and sampling fraction
 }
+\details{
+This function estimates speciation and extinction rate given a fixed
+extinction fraction (i.e. extinction rate divided by speciation rate).
+Calculation is based on the reconstructed birth-death process (Nee et al., 1994),
+implemented in the make.bd function of the diversitree package (FitzJohn, 2012).
+}
 \examples{
-estimateBD(phy = , epsilon = 0.5)
+estimateBD(tree = , epsilon = 0.5)
+}
+\references{
+FitzJohn R.G. 2012.
+diversitree: comparative phylogenetic analyses of diversification in R.
+Methods Ecol. Evol. 3(6): 1084-1092.
+
+Nee S., May R.M., and Harvey P.H. 1994.
+The reconstructed evolutionary process.
+Philos. Trans. R. Soc. Lond. B Biol. Sci. 344:305-311.
 }
 \author{
 Torsten Hauffe

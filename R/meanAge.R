@@ -2,10 +2,10 @@
 #'
 #' @description This function calculates the expected mean species age.
 #'
-#' @param v branching time
-#' @param lambda speciation rate
-#' @param mu extinction rate
-#' @param rho sampling fraction (Default: 1.0)
+#' @param v Branching time
+#' @param lambda Speciation rate
+#' @param mu Extinction rate
+#' @param rho Sampling fraction (Default: 1.0)
 #'
 #' @author Daniele Silvestro
 #'

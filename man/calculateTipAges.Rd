@@ -6,6 +6,21 @@
 \usage{
 calculateTipAges(tree)
 }
+\arguments{
+\item{tree}{A phylogeny in ape “phylo” format}
+}
+\value{
+A data.frame with two columns.Name of the tip "tip" and its age "tip.age"
+}
 \description{
-Get Phylogenetic Ages for the Tips of a Phylogeny
+This function calculates the phylogenetic ages for each tip in a tree.
+}
+\details{
+This function is based on Tanentzap et al. (20XX)
+}
+\examples{
+calculateTipAges(tree)
+}
+\author{
+Carlos Calderón del Cid, Torsten Hauffe
 }

@@ -2,25 +2,40 @@
 #'
 #' @description This function estimates speciation and extinction rate from a phylogeny under a given extinction and sampling fraction
 #'
-#' @param phy An ultrametric bifurcating phylogenetic tree, in ape "phylo" format.
-#' @param epsilon Extinction fraction
-#' @param rho Sampling fraction
+#' @param tree An ultrametric bifurcating phylogenetic tree, in ape "phylo" format.
+#' @param epsilon Extinction fraction (Default: 0.0)
+#' @param rho Sampling fraction (Default: 1.0)
 #' @param ml_optim Method to use for optimisation (Default: "subplex"). May be one of "optim", "subplex", "nlminb", "nlm" (partial unambigious string is allowed).
 #'
+#' @details
+#' This function estimates speciation and extinction rate given a fixed
+#' extinction fraction (i.e. extinction rate divided by speciation rate).
+#' Calculation is based on the reconstructed birth-death process (Nee et al., 1994),
+#' implemented in the make.bd function of the diversitree package (FitzJohn, 2012).
+#'
 #' @author Torsten Hauffe
+#'
+#' @references
+#' FitzJohn R.G. 2012.
+#' diversitree: comparative phylogenetic analyses of diversification in R.
+#' Methods Ecol. Evol. 3(6): 1084-1092.
+#'
+#' Nee S., May R.M., and Harvey P.H. 1994.
+#' The reconstructed evolutionary process.
+#' Philos. Trans. R. Soc. Lond. B Biol. Sci. 344:305-311.
 #'
 #' @return A named vector of two parameters, lambda and mu.
 #'
 #' @examples
-#' estimateBD(phy = , epsilon = 0.5)
+#' estimateBD(tree = , epsilon = 0.5)
 
 
-estimateBD <- function(phy, epsilon = 0, rho = 1, ml_optim = "subplex") {
+estimateBD <- function(tree, epsilon = 0.0, rho = 1.0, ml_optim = "subplex") {
   if(epsilon >= 1) {
     stop("Extinction fraction should not be greater than 1")
   }
   # Birth-death likelihood
-  bd_lik <- make.bd(tree = phy, sampling.f = rho)
+  bd_lik <- make.bd(tree = tree, sampling.f = rho)
   # Constrain extinction fraction
   con <- paste0("mu ~ ", epsilon, " * lambda")
   bd_lik <- constrain(bd_lik, con)
