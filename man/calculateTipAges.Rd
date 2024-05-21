@@ -10,7 +10,7 @@ calculateTipAges(tree)
 \item{tree}{A phylogeny in ape “phylo” format}
 }
 \value{
-A data.frame with two columns.Name of the tip "tip" and its age "tip.age"
+A data.frame with two colnames: the name of the tip "tip" and its associated age "age"
 }
 \description{
 This function calculates the phylogenetic ages for each tip in a tree.
@@ -19,7 +19,8 @@ This function calculates the phylogenetic ages for each tip in a tree.
 This function is based on Tanentzap et al. (20XX)
 }
 \examples{
-calculateTipAges(tree)
+data(Cetacea)
+calculateTipAges(Cetacea)
 }
 \author{
 Carlos Calderón del Cid, Torsten Hauffe

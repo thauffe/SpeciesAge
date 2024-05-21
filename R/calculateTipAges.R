@@ -8,10 +8,11 @@
 #'
 #' @details This function is based on Tanentzap et al. (20XX)
 #'
-#' @return A data.frame with two columns.Name of the tip "tip" and its age "tip.age"
+#' @return A data.frame with two colnames: the name of the tip "tip" and its associated age "age"
 #'
 #' @examples
-#' calculateTipAges(tree)
+#' data(Cetacea)
+#' calculateTipAges(Cetacea)
 calculateTipAges <- function(tree) {
   phy.age <- picante::node.age(tree)
   BL.position <- cbind(phy.age$edge, phy.age$age, tree$edge.length)
@@ -26,13 +27,13 @@ calculateTipAges <- function(tree) {
   ## node.ages is a data frame listing as variables the identity of parental and
   # daughter nodes, the distance from the root and from the present of each node,
   # the branch length and the age of the most recent common ancestor
-  species.ages <- picante::node.ages[node.ages[,2] < length(tree$tip) + 1, ]
+  species.ages <- node.ages[node.ages[,2] < length(tree$tip) + 1, ]
   rownames(species.ages) <- tree$tip[species.ages$daughter.node]
   # species ages is node.ages data frame reduced to the tips (species)
   species.ages <- species.ages[order(row.names(species.ages)), ]
   output.table <- as.data.frame(cbind(row.names(species.ages),
                                       species.ages$mrca.age))
-  colnames(output.table) <- c("tip", "tip.age")
-  output.table$tip.age <- as.numeric(output.table$tip.age)
+  colnames(output.table) <- c("tip", "age")
+  output.table$age <- as.numeric(output.table$age)
   return(output.table)
 }
